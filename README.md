@@ -1,24 +1,34 @@
-# README
+# 42WOLFSBURG
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## BOOTCAMP
 
-Things you may want to cover:
+### FEBRUARY 2121
 
-* Ruby version
+![screenshot](42basecamp.png)
 
-* System dependencies
+![screenshot](42wolfsburg.jpeg)
 
-* Configuration
+## Author
 
-* Database creation
+👤 **Igors Oleinikovs**
 
-* Database initialization
+- GitHub: [Igors78](https://github.com/Igors78)
+- Twitter: [@oleinikovs](https://twitter.com/oleinikovs)
+- LinkedIn:
+  [Oleinikovs Igors](https://www.linkedin.com/in/igors-oleinikovs-17a10958/)
 
-* How to run the test suite
+## 🤝 Contributing
 
-* Services (job queues, cache servers, search engines, etc.)
+Contributions, issues, and feature requests are welcome!
 
-* Deployment instructions
+## Show your support
 
-* ...
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- 42 Wolfsburg
+
+## 📝 License
+
+This project is [UNLicense](./LICENSE) licensed.
