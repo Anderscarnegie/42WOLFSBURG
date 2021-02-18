@@ -27,9 +27,7 @@ char *ft_capitalize(char *str)
     while (str[i] != '\0')
     {
         if ((str[i] >= ' ' && str[i] <= '/') ||
-            (str[i] >= ':' && str[i] <= '@') ||
-            (str[i] >= '[' && str[i] <= '`') ||
-            (str[i] >= '{' && str[i] <= '~'))
+            (str[i] >= ':' && str[i] <= '@'))
         {
             if (str[i + 1] >= 'a' && str[i + 1] <= 'z')
             {

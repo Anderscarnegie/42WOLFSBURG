@@ -9,7 +9,7 @@ int ft_str_is_alpha(char *str)
         {
             return (0);
         }
-        else if (str[i] > 'Z' && str[i] < 'a' || str[i] > 'z')
+        else if ((str[i] > 'Z' && str[i] < 'a') || str[i] > 'z')
         {
             return (0);
         }
