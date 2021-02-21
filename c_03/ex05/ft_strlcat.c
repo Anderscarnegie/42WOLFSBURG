@@ -25,3 +25,4 @@ unsigned int ft_strlcat(char *dest, char *src, unsigned int size)
     dest[i] = '\0';
     return (s);
 }
+//Moulinette error
