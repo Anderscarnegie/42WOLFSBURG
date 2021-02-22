@@ -6,6 +6,7 @@ int ft_atoi(char *str)
 
     i = 0;
     sign = 1;
+    res = 0;
     while ((str[i] != '\0') && (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' || str[i] == '\r' || str[i] == '\t' || str[i] == '\v'))
     {
         i++;
