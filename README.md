@@ -28,6 +28,7 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - 42 Wolfsburg
+- Udemy C course
 
 ## 📝 License
 
