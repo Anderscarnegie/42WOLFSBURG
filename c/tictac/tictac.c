@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char square[10] = {'o', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+char square[10] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 int choice, player;
 
 int checkForWin();
@@ -119,7 +119,7 @@ void displayBoard()
 }
 
 /***************************************
-set the board with the correct character,
+Set the board with the correct character,
 x or o in the correct spot in the array
 ****************************************/
 void markBoard(char mark)
@@ -155,6 +155,5 @@ void markBoard(char mark)
         printf("Invalid move ");
 
         player--;
-        //getch();
     }
 }
