@@ -96,7 +96,7 @@ FUNCTION TO DRAW BOARD OF TIC TAC TOE WITH PLAYERS MARK
  *******************************************************************/
 void displayBoard()
 {
-    system("cls");
+    system("clear");
 
     printf("\n\n\tTic Tac Toe\n\n");
 
@@ -155,5 +155,6 @@ void markBoard(char mark)
         printf("Invalid move ");
 
         player--;
+        getchar();
     }
 }
