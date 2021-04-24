@@ -53,7 +53,7 @@ void sort_array(int size, int *arr)
 
 int main(void)
 {
-    int arr[10] = {33, 22, 8, 10, 7, 96, 100, 23, 22, 33};
+    int arr[10] = {33, 22, 8, 10, 7, 96, 100, 23, 22, 34};
     int size = 10;
     int i;
 
