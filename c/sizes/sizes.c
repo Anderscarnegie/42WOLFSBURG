@@ -3,6 +3,9 @@
 
 int main(void)
 {
+    int x = 10;
+    int *p = &x;
+
     printf("Size of int is %d bytes\n", (int)sizeof(int));
     printf("Size of unsigned int is %d bytes\n", (int)sizeof(unsigned int));
     printf("Size of char is %d bytes\n", (int)sizeof(char));
@@ -10,5 +13,6 @@ int main(void)
     printf("Size of double is %d bytes\n", (int)sizeof(double));
     printf("Size of long is %d bytes\n", (int)sizeof(long));
     printf("Size of long long is %d bytes\n", (int)sizeof(long long));
+    printf("Size of pointer is %d bytes\n", (int)sizeof(p));
     return (0);
 }
