@@ -14,5 +14,7 @@ int main(void)
     printf("Size of long is %d bytes\n", (int)sizeof(long));
     printf("Size of long long is %d bytes\n", (int)sizeof(long long));
     printf("Size of pointer is %d bytes\n", (int)sizeof(p));
+    printf("Size of short is %d bytes\n", (int)sizeof(short));
+    printf("Size of unsigned short is %d bytes\n", (int)sizeof(unsigned short));
     return (0);
 }
