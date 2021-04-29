@@ -1,8 +1,8 @@
 # 42WOLFSBURG
 
-## BOOTCAMP
+## BASECAMP FEBRUARY 2121
 
-### FEBRUARY 2121
+## CORE CURRICULUM MAY 2021 - ...
 
 ![screenshot](42basecamp.png)
 
