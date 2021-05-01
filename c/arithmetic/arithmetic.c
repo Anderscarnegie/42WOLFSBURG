@@ -14,7 +14,7 @@ int main()
 
 int stringLength(const char *string)
 {
-    const char *lastAddress = string;
+    const char *lastAddress = string; //Create own pointer to use it in arithmetic
 
     while (*lastAddress)
         ++lastAddress;
