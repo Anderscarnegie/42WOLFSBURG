@@ -8,7 +8,7 @@ int checkForWin();
 void displayBoard();
 void markBoard(char mark);
 
-int main()
+int main(void)
 {
     int gameStatus;
 
