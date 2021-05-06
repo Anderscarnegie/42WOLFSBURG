@@ -4,7 +4,7 @@
 #define MONTHS 12
 #define YEARS 5
 
-int main()
+int main(void)
 {
     // initialize rainfall data for 2011-2015
     float rain[YEARS][MONTHS] =
@@ -45,5 +45,5 @@ int main()
 
     printf("\n");
 
-    return 0;
+    return (0);
 }

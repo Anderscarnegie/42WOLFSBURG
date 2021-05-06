@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main()
+int main(void)
 {
     char str[100];
     char name[25][50], temp[25];
@@ -52,5 +52,5 @@ int main()
     for (i = 0; i <= n; i++)
         printf("%s\n", name[i]);
 
-    return 0;
+    return (0);
 }
