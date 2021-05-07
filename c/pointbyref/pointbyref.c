@@ -3,14 +3,14 @@
 
 void square(int *x);
 
-int main()
+int main(void)
 {
     int num = 9;
 
     square(&num);
     printf("The square of the given number is %d\n", num);
 
-    return 0;
+    return (0);
 }
 
 void square(int *x)

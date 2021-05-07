@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int main()
+int main(void)
 {
     int p;
     int i;
@@ -35,5 +35,5 @@ int main()
         printf("%i  ", primes[i]);
 
     printf("\n");
-    return 0;
+    return (0);
 }

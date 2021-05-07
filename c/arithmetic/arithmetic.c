@@ -3,13 +3,13 @@
 
 int stringLength(const char *string);
 
-int main()
+int main(void)
 {
     printf("%d \n", stringLength("string Length test"));
     printf("%d \n", stringLength(""));
     printf("%d \n", stringLength("igor"));
 
-    return 0;
+    return (0);
 }
 
 int stringLength(const char *string)
@@ -17,7 +17,7 @@ int stringLength(const char *string)
     const char *lastAddress = string; //Create own pointer to use it in arithmetic
 
     while (*lastAddress)
-        ++lastAddress;
+        lastAddress++;
 
     return lastAddress - string;
 }

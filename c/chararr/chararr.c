@@ -6,7 +6,7 @@ int stringLength(const char string[]);
 void concat(char result[], const char str[], const char str1[]);
 bool equalStrings(const char s1[], const char s2[]);
 
-int main()
+int main(void)
 {
     const char word1[] = "jason";
     const char word2[] = "ok";
