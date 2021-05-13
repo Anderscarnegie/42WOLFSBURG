@@ -6,7 +6,7 @@ void	*ft_memchr(const void *str, int ch, size_t count);
 int	main (void)
 {
 	const char	str[] = "http://www.tutorialspoint.com";
-	const char	ch = 'u';
+	const char	ch = '!';
 	char		*ret;
 
 	ret = memchr(str, ch, strlen(str));

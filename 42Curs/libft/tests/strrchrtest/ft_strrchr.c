@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/11 22:01:56 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/12 07:19:01 by ioleinik         ###   ########.fr       */
+/*   Created: 2021/05/13 14:51:15 by ioleinik          #+#    #+#             */
+/*   Updated: 2021/05/13 14:58:53 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_bzero(void *str, size_t length)
+char	*ft_strrchr(const char *str, int ch)
 {
-	size_t	i;
+	int		i;
+	char	*p;
 
 	i = 0;
-	while (i < length)
+	p = NULL;
+	while (str[i] != '\0')
 	{
-		((char *)str)[i] = '\0';
+		if (((unsigned char *)str)[i] == (unsigned char)ch)
+			p = ((char *)(str + i));
 		i++;
 	}
+	if (str[i] == '\0' && (unsigned char)ch == '\0')
+		return ((char *)(str + i));
+	if (p)
+		return (p);
+	return (NULL);
 }

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/11 22:01:56 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/12 07:19:01 by ioleinik         ###   ########.fr       */
+/*   Created: 2021/05/12 19:03:57 by ioleinik          #+#    #+#             */
+/*   Updated: 2021/05/12 19:25:31 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_bzero(void *str, size_t length)
+size_t	ft_strlen(char *str)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < length)
+	while (str[i] != '\0')
 	{
-		((char *)str)[i] = '\0';
 		i++;
 	}
+	return (i);
 }

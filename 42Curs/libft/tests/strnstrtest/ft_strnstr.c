@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/11 22:01:56 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/12 07:19:01 by ioleinik         ###   ########.fr       */
+/*   Created: 2021/05/13 18:22:48 by ioleinik          #+#    #+#             */
+/*   Updated: 2021/05/13 18:48:40 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_bzero(void *str, size_t length)
+char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
 	size_t	i;
+	size_t	k;
 
 	i = 0;
-	while (i < length)
+	if (to_find[0] == '\0')
 	{
-		((char *)str)[i] = '\0';
+		return ((char *)str);
+	}
+	while (str[i] != '\0' && i < len)
+	{
+		k = 0;
+		while (str[i + k] == to_find[k] && k < len)
+		{
+			k++;
+			if (to_find[k] == '\0')
+			{
+				return ((char *)&str[i]);
+			}
+		}
 		i++;
 	}
+	return (0);
 }

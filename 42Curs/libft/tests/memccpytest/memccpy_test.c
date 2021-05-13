@@ -5,8 +5,8 @@ void	*ft_memccpy(void *dest, const void *src, int ch, size_t length);
 
 int	main(void)
 {
-	char	src[40];
-	char	dest[40];
+	char	src[50];
+	char	dest[50];
 
 	strcpy(src, "Memcpy copies from src to dest n bytes");
 	strcpy(dest, "Heloooo!!");
@@ -16,7 +16,7 @@ int	main(void)
 	printf("After  memccpy dest = %s\n", dest);
 	printf("Before ft_memccpy dest = %s\n", dest);
 	printf("After dest = %s\n", (char *)ft_memccpy(dest, src, 'c', 6));
-	ft_memccpy(dest, src, 'c', 4);
+	ft_memccpy(dest, src, 'c', 6);
 	printf("After  ft_memccpy dest = %s\n", dest);
 	return (0);
 }
