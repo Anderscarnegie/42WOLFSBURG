@@ -3,6 +3,7 @@
 #include <bsd/string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdio.h>
 
 void	setUp(void)
 {
@@ -353,7 +354,6 @@ void	test_ft_substr(void)
 	free(a);
 	a = ft_substr(s, 40, 3);
 	TEST_ASSERT_NULL(a);
-	free(a);
 }
 
 void	test_ft_strjoin(void)
@@ -372,7 +372,81 @@ void	test_ft_strjoin(void)
 
 void	test_ft_strtrim(void)
 {
-	
+	const char	s1[] = "Take lorem ipsum Teka";
+	const char	s2[] = "Teka ";
+	const char	s3[] = "aTke ";
+	char		*a;
+
+	a = ft_strtrim(s1, s2);
+	TEST_ASSERT_EQUAL_STRING("lorem ipsum", a);
+	free(a);
+	a = ft_strtrim(s1, s3);
+	TEST_ASSERT_EQUAL_STRING("lorem ipsum", a);
+	free(a);
+}
+
+void	test_ft_split(void)
+{
+	const char	s1[] = "Lorem ipsum dolor sit amet";
+	int			t;
+	char		s2;
+	char		**a;
+
+	t = 0;
+	s2 = ' ';
+	a = ft_split((char *)s1, s2);
+	TEST_ASSERT_EQUAL_STRING("Lorem", a[0]);
+	TEST_ASSERT_EQUAL_STRING("ipsum", a[1]);
+	TEST_ASSERT_EQUAL_STRING("dolor", a[2]);
+	TEST_ASSERT_EQUAL_STRING("sit", a[3]);
+	TEST_ASSERT_EQUAL_STRING("amet", a[4]);
+	TEST_ASSERT_NULL(a[5]);
+	while (a[t] != NULL)
+	{
+		free(a[t]);
+		t++;
+	}
+	free(a);
+}
+
+void	test_ft_itoa(void)
+{
+	char	*a;
+
+	a = ft_itoa(-2147483648);
+	TEST_ASSERT_EQUAL_STRING("-2147483648", a);
+	free(a);
+	a = ft_itoa(2147483647);
+	TEST_ASSERT_EQUAL_STRING("2147483647", a);
+	free(a);
+	a = ft_itoa(-2);
+	TEST_ASSERT_EQUAL_STRING("-2", a);
+	free(a);
+	a = ft_itoa(0);
+	TEST_ASSERT_EQUAL_STRING("0", a);
+	free(a);
+}
+
+char	f(unsigned int pos, char c)
+{
+	pos = ft_toupper(c);
+	c = (char)(pos);
+	return (c);
+}
+
+void	test_ft_strmapi(void)
+{
+	const char	s[] = "Lorem ipsum dolor sit amet";
+	char		*res;
+
+	res = ft_strmapi(s, f);
+	TEST_ASSERT_EQUAL_STRING("LOREM IPSUM DOLOR SIT AMET", res);
+	free(res);
+}
+
+void	test_ft_putchar_fd(void)
+{
+	TEST_ASSERT_EQUAL(fprintf(1, "Q"), ft_putchar_fd('Q', 1));
 }
 
 int	main(void)
@@ -405,5 +479,9 @@ int	main(void)
 	RUN_TEST(test_ft_substr);
 	RUN_TEST(test_ft_strjoin);
 	RUN_TEST(test_ft_strtrim);
+	RUN_TEST(test_ft_split);
+	RUN_TEST(test_ft_itoa);
+	RUN_TEST(test_ft_strmapi);
+	RUN_TEST(test_ft_putchar_fd);
 	return (UNITY_END());
 }
