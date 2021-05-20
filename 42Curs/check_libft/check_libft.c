@@ -354,6 +354,7 @@ void	test_ft_substr(void)
 	free(a);
 	a = ft_substr(s, 40, 3);
 	TEST_ASSERT_NULL(a);
+	free(a);
 }
 
 void	test_ft_strjoin(void)
@@ -446,7 +447,85 @@ void	test_ft_strmapi(void)
 
 void	test_ft_putchar_fd(void)
 {
-	TEST_ASSERT_EQUAL(fprintf(1, "Q"), ft_putchar_fd('Q', 1));
+	FILE	*pfile;
+	int		fd;
+	int		c;
+
+	pfile = fopen("test.txt", "w+");
+	fd = fileno(pfile);
+	ft_putchar_fd('Q', fd);
+	rewind(pfile);
+	c = fgetc(pfile);
+	if (c != EOF)
+		TEST_ASSERT_EQUAL('Q', c);
+	fclose(pfile);
+	remove("test.txt");
+	pfile = NULL;
+}
+
+void	test_ft_putstr_fd(void)
+{
+	FILE		*pfile;
+	int			fd;
+	const char	s[] = "42Wolfsburg";
+	char		*str;
+
+	pfile = fopen("test.txt", "w+");
+	fd = fileno(pfile);
+	ft_putstr_fd((char *)s, fd);
+	rewind(pfile);
+	str = (char *)malloc(sizeof(char) * ft_strlen((char *)s) + 1);
+	fgets(str, ft_strlen((char *)s) + 1, pfile);
+	TEST_ASSERT_EQUAL_STRING("42Wolfsburg", str);
+	fclose(pfile);
+	remove("test.txt");
+	pfile = NULL;
+	free(str);
+}
+
+void	test_ft_putendl_fd(void)
+{
+	FILE		*pfile;
+	int			fd;
+	const char	s[] = "42Wolfsburg";
+	char		*str;
+	int			c;
+
+	pfile = fopen("test.txt", "w+");
+	fd = fileno(pfile);
+	ft_putendl_fd((char *)s, fd);
+	rewind(pfile);
+	str = (char *)malloc(sizeof(char) * ft_strlen((char *)s) + 1);
+	fgets(str, ft_strlen((char *)s) + 1, pfile);
+	TEST_ASSERT_EQUAL_STRING("42Wolfsburg", str);
+	c = fgetc(pfile);
+	if (c != EOF)
+		TEST_ASSERT_EQUAL('\n', c);
+	fclose(pfile);
+	remove("test.txt");
+	pfile = NULL;
+	free(str);
+}
+
+void	test_ft_putnbr_fd(void)
+{
+	FILE		*pfile;
+	int			fd;
+	char		*str;
+	int			num;
+
+	pfile = fopen("test.txt", "w+");
+	fd = fileno(pfile);
+	num = -2147483648;
+	ft_putnbr_fd(num, fd);
+	rewind(pfile);
+	str = (char *)malloc(sizeof(char) * 15);
+	fgets(str, 15, pfile);
+	TEST_ASSERT_EQUAL_STRING("-2147483648", str);
+	fclose(pfile);
+	remove("test.txt");
+	pfile = NULL;
+	free(str);
 }
 
 int	main(void)
@@ -483,5 +562,8 @@ int	main(void)
 	RUN_TEST(test_ft_itoa);
 	RUN_TEST(test_ft_strmapi);
 	RUN_TEST(test_ft_putchar_fd);
+	RUN_TEST(test_ft_putstr_fd);
+	RUN_TEST(test_ft_putendl_fd);
+	RUN_TEST(test_ft_putnbr_fd);
 	return (UNITY_END());
 }
