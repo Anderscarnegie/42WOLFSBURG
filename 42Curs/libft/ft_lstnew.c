@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 09:11:59 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/20 07:34:40 by ioleinik         ###   ########.fr       */
+/*   Created: 2021/05/20 15:47:57 by ioleinik          #+#    #+#             */
+/*   Updated: 2021/05/20 16:02:28 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_list	*ft_lstnew(void *content)
 {
-	char	*sub;
-	size_t	k;
+	t_list	*new;
 
-	k = 0;
-	sub = (char *)malloc(sizeof(char) * len + 1);
-	if (NULL == sub)
-		return (sub);
-	while (k < len)
-	{
-		if (s[start] == '\0')
-		{
-			free(sub);
-			return (NULL);
-		}
-		sub[k] = s[start];
-		start++;
-		k++;
-	}
-	sub[k] = '\0';
-	return (sub);
+	new = NULL;
+	new = malloc(sizeof(t_list));
+	if (NULL == new)
+		return (new);
+	new -> content = content;
+	new -> next = NULL;
+	return (new);
 }

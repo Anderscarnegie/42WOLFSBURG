@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 19:11:43 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/17 12:09:50 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/05/19 15:42:55 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	**allocate(char const *s, char c)
 
 	i = 0;
 	k = 0;
-	a = (char **)malloc(ft_strlen((char *)s) + count(s, c) + sizeof(void *));
+	a = (char **)malloc((count(s, c) + 2) * sizeof(char *));
 	while (i < (count(s, c) + 1))
 	{
 		j = 0;
@@ -46,13 +46,11 @@ static char	**allocate(char const *s, char c)
 			k++;
 			j++;
 		}
-		a[i] = (char *)malloc(j + 1);
+		a[i] = (char *)malloc((j + 1) * sizeof(char));
 		k++;
 		i++;
 	}
-	a[i] = (char *)malloc(sizeof(void *));
-	if (!(a))
-		return (NULL);
+	a[i] = NULL;
 	return (a);
 }
 
@@ -81,6 +79,5 @@ char	**ft_split(char const *s, char c)
 		k++;
 		i++;
 	}
-	arr[i] = NULL;
 	return (arr);
 }
