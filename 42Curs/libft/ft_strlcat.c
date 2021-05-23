@@ -6,34 +6,35 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 12:13:52 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/13 13:24:05 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/05/22 13:53:10 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t destsize)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
+	size_t	dest_len;
+	size_t	src_len;
 	size_t	i;
-	size_t	k;
-	size_t	s;
+	size_t	ret;
+	char	*s;
 
+	s = (char *)src;
+	dest_len = ft_strlen(dest);
+	src_len = ft_strlen(s);
 	i = 0;
-	k = 0;
-	s = 0;
-	while (src[s] != '\0')
-		s++;
-	while (dest[i] != '\0')
-		i++;
-	s = s + i;
-	if (destsize <= i)
-		return (s);
-	while (src[k] != '\0' && i + 1 < destsize)
+	ret = 0;
+	if (size > dest_len)
+		ret = src_len + dest_len;
+	else
+		ret = src_len + size;
+	while (s[i] != '\0' && dest_len + 1 < size)
 	{
-		dest[i] = src[k];
+		dest[dest_len] = s[i];
 		i++;
-		k++;
+		dest_len++;
 	}
-	dest[i] = '\0';
-	return (s);
+	dest[dest_len] = '\0';
+	return (ret);
 }

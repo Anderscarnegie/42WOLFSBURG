@@ -5,79 +5,92 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 19:11:43 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/19 15:42:55 by ioleinik         ###   ########.fr       */
+/*   Created: 2021/05/22 22:41:12 by ioleinik          #+#    #+#             */
+/*   Updated: 2021/05/22 23:37:55 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count(char const *str, char ch)
+static size_t	count_str(char const *s, char c)
 {
-	int		i;
-	size_t	p;
+	size_t	i;
+	size_t	count;
 
+	if (!s[0])
+		return (0);
 	i = 0;
-	p = 0;
-	while (str[i] != '\0')
+	count = 0;
+	while (s[i] && s[i] == c)
+		i++;
+	while (s[i])
 	{
-		if (str[i] == ch)
-			p += 1;
+		if (s[i] == c)
+		{
+			count++;
+			while (s[i] && s[i] == c)
+				i++;
+			continue ;
+		}
 		i++;
 	}
-	return (p);
+	if (s[i - 1] != c)
+		count++;
+	return (count);
 }
 
-static char	**allocate(char const *s, char c)
+static void	get_next(char **next_str, size_t *nex_len, char c)
 {
-	char	**a;
 	size_t	i;
-	size_t	k;
-	size_t	j;
 
+	*next_str += *nex_len;
+	*nex_len = 0;
 	i = 0;
-	k = 0;
-	a = (char **)malloc((count(s, c) + 2) * sizeof(char *));
-	while (i < (count(s, c) + 1))
+	while (**next_str && **next_str == c)
+		(*next_str)++;
+	while ((*next_str)[i])
 	{
-		j = 0;
-		while (s[k] != '\0' && s[k] != c)
-		{
-			k++;
-			j++;
-		}
-		a[i] = (char *)malloc((j + 1) * sizeof(char));
-		k++;
+		if ((*next_str)[i] == c)
+			return ;
+		(*nex_len)++;
 		i++;
 	}
-	a[i] = NULL;
-	return (a);
+}
+
+static char	*set(char c)
+{
+	static char	s[5];
+
+	s[0] = c;
+	s[1] = '\0';
+	return (s);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
+	char	**tab;
+	char	*string;
+	char	*next_str;
+	size_t	nex_len;
 	size_t	i;
-	size_t	k;
-	size_t	j;
 
-	i = 0;
-	k = 0;
-	arr = allocate(s, c);
-	if (!arr)
+	string = ft_strtrim(s, set(c));
+	if (!string)
 		return (NULL);
-	while (i < (count(s, c) + 1))
+	if (!(tab = (char **)malloc(sizeof(char *) * (count_str(string, c) + 1))))
+		return (NULL);
+	i = 0;
+	next_str = (char *)string;
+	nex_len = 0;
+	while (i < count_str(string, c))
 	{
-		j = 0;
-		while (s[k] != '\0' && s[k] != c)
-		{
-			arr[i][j] = s[k];
-			k++;
-			j++;
-		}
-		arr[i][j] = '\0';
-		k++;
+		get_next(&next_str, &nex_len, c);
+		if (!(tab[i] = (char *)malloc(sizeof(char) * (nex_len + 1))))
+			return (NULL);
+		ft_strlcpy(tab[i], next_str, nex_len + 1);
 		i++;
 	}
-	return (arr);
+	tab[i] = NULL;
+	free(string);
+	return (tab);
 }

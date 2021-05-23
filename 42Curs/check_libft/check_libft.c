@@ -166,6 +166,8 @@ void	test_ft_memcmp(void)
 	TEST_ASSERT_EQUAL(ft_memcmp(s1, s2, 4), memcmp(s1, s2, 4));
 	TEST_ASSERT_TRUE(memcmp(s1, s3, 6) > 0);
 	TEST_ASSERT_TRUE(ft_memcmp(s1, s3, 6) > 0);
+	TEST_ASSERT_TRUE(memcmp("t\200", "t\0", 2) > 0);
+	TEST_ASSERT_TRUE(ft_memcmp("t\200", "t\0", 2) > 0);
 }
 
 void	test_ft_memcpy(void)
@@ -227,21 +229,35 @@ void	test_ft_strchr(void)
 
 void	test_ft_strlcat(void)
 {
-	char	s1[30];
-	char	s2[30];
-	char	s3[30];
+	char	s1[] = "rrrrrrrrrrrrrrr";
+	char	s2[300];
+	char	s3[] = "lorem ipsum dolor sit amet";
+	char	s4[] = "LXE4Jm7sSl";
+	char	s5[300];
+	char	s6[] = "iYcgzv5xVEPMAhGl Q02Z87Yv gCpvJ vpdlCL2fWYxPy mfjg0K1r 263b L4Yoe hmx1s0GSUzrITig aKjqL7sF2b AeYHO5bS EWchmzyrYxA nuFPV5Ke Jo9AF4I 0VieFpuqZzGg98TJf NPi 2icYX";
 	size_t	i;
 	size_t	k;
 
-	strcpy(s1, "Lorem ipsum ");
-	strcpy(s2, "Lorem ipsum ");
-	strcpy(s3, "dolor sit amet");
-	i = strlcat(s1, s3, 30);
-	k = ft_strlcat(s2, s3, 30);
-	TEST_ASSERT_EQUAL_STRING("Lorem ipsum dolor sit amet", s1);
-	TEST_ASSERT_EQUAL_STRING("Lorem ipsum dolor sit amet", s2);
+	strcpy(s2, s1);
+	i = strlcat(s1, s3, 15);
+	k = ft_strlcat(s2, s3, 15);
 	TEST_ASSERT_EQUAL(i, k);
+	TEST_ASSERT_EQUAL_STRING("rrrrrrrrrrrrrrr", s1);
+	TEST_ASSERT_EQUAL_STRING("rrrrrrrrrrrrrrr", s2);
+	strcpy(s5, s4);
+	i = strlcat(s4, s6, 0);
+	k = ft_strlcat(s5, s6, 0);
+	TEST_ASSERT_EQUAL(i, k);
+	strcpy(s4, "Lorem ipsu");
+	strcpy(s5, "Lorem ipsu");
+	strcpy(s6, "dolor sit amet");
+	i = strlcat(s4, s6, 25);
+	k = ft_strlcat(s5, s6, 25);
+	TEST_ASSERT_EQUAL(i, k);
+	TEST_ASSERT_EQUAL_STRING("Lorem ipsudolor sit amet", s4);
+	TEST_ASSERT_EQUAL_STRING("Lorem ipsudolor sit amet", s5);
 }
+
 void	test_ft_strlcpy(void)
 {
 	char	s1[30];
@@ -253,10 +269,10 @@ void	test_ft_strlcpy(void)
 	strcpy(s1, "Lorem ipsum ");
 	strcpy(s2, "Lorem ipsum ");
 	strcpy(s3, "dolor sit amet");
-	i = strlcpy(s1, s3, 30);
-	k = ft_strlcpy(s2, s3, 30);
-	TEST_ASSERT_EQUAL_STRING("dolor sit amet", s1);
-	TEST_ASSERT_EQUAL_STRING("dolor sit amet", s2);
+	i = strlcpy(s1, s3, 6);
+	k = ft_strlcpy(s2, s3, 6);
+	TEST_ASSERT_EQUAL_STRING("dolor", s1);
+	TEST_ASSERT_EQUAL_STRING("dolor", s2);
 	TEST_ASSERT_EQUAL(i, k);
 }
 
@@ -279,15 +295,18 @@ void	test_ft_strncmp(void)
 	TEST_ASSERT_EQUAL(ft_strncmp(s1, s2, 4), strncmp(s1, s2, 4));
 	TEST_ASSERT_TRUE(strncmp(s1, s3, 6) > 0);
 	TEST_ASSERT_TRUE(ft_strncmp(s1, s3, 6) > 0);
+	TEST_ASSERT_TRUE(strncmp("test\200", "test\0", 6) > 0);
+	TEST_ASSERT_TRUE(ft_strncmp("test\200", "test\0", 6) > 0);
 }
 
 void	test_ft_strnstr(void)
 {
-	const char	s[] = "Find char and return pointer to it";
+	const char	s[] = "Find str and return pointer to it";
 
 	TEST_ASSERT_EQUAL(strnstr(s, "", 35), ft_strnstr(s, "", 35));
 	TEST_ASSERT_EQUAL(strnstr(s, "etu", 35), ft_strnstr(s, "etu", 35));
 	TEST_ASSERT_EQUAL(strnstr(s, "$", 35), ft_strnstr(s, "$", 35));
+	TEST_ASSERT_EQUAL(strnstr("lorem ipsum dolor sit amet", "dolor", 15), ft_strnstr("lorem ipsum dolor sit amet", "dolor", 15));
 }
 
 void	test_ft_strrchr(void)
@@ -343,17 +362,23 @@ void	test_ft_strdup(void)
 
 void	test_ft_substr(void)
 {
-	const char	s[] = "Take substring from any part of this one";
-	char		*a;
+	char	s[] = "Take substring from any part of this one";
+	char	s1[] = "";
+	char	s2[] = "Test";
+	char	s3[] = "Test";
+	char	*a;
 
 	a = ft_substr(s, 5, 9);
 	TEST_ASSERT_EQUAL_STRING("substring", a);
 	free(a);
-	a = ft_substr(s, 0, 4);
-	TEST_ASSERT_EQUAL_STRING("Take", a);
+	a = ft_substr(s1, 0, 1);
+	TEST_ASSERT_EQUAL_STRING("", a);
 	free(a);
-	a = ft_substr(s, 40, 3);
-	TEST_ASSERT_NULL(a);
+	a = ft_substr(s2, 10, 1);
+	TEST_ASSERT_EQUAL_STRING("", a);
+	free(a);
+	a = ft_substr(s3, 1, 6);
+	TEST_ASSERT_EQUAL_STRING("est", a);
 	free(a);
 }
 
@@ -373,22 +398,22 @@ void	test_ft_strjoin(void)
 
 void	test_ft_strtrim(void)
 {
-	const char	s1[] = "Take lorem ipsum Teka";
-	const char	s2[] = "Teka ";
-	const char	s3[] = "aTke ";
+	const char	s1[] = "          ";
+	const char	s3[] = "  \n  \t  lorem \n ipsum \t dolor \n sit \t amet  \t \n ";
+	const char	s2[] = "\t \n";
 	char		*a;
 
 	a = ft_strtrim(s1, s2);
-	TEST_ASSERT_EQUAL_STRING("lorem ipsum", a);
+	TEST_ASSERT_EQUAL_STRING("", a);
 	free(a);
-	a = ft_strtrim(s1, s3);
-	TEST_ASSERT_EQUAL_STRING("lorem ipsum", a);
+	a = ft_strtrim(s3, s2);
+	TEST_ASSERT_EQUAL_STRING("lorem \n ipsum \t dolor \n sit \t amet", a);
 	free(a);
 }
 
 void	test_ft_split(void)
 {
-	const char	s1[] = "Lorem ipsum dolor sit amet";
+	const char	s1[] = "          ";
 	int			t;
 	char		s2;
 	char		**a;
@@ -396,12 +421,7 @@ void	test_ft_split(void)
 	t = 0;
 	s2 = ' ';
 	a = ft_split((char *)s1, s2);
-	TEST_ASSERT_EQUAL_STRING("Lorem", a[0]);
-	TEST_ASSERT_EQUAL_STRING("ipsum", a[1]);
-	TEST_ASSERT_EQUAL_STRING("dolor", a[2]);
-	TEST_ASSERT_EQUAL_STRING("sit", a[3]);
-	TEST_ASSERT_EQUAL_STRING("amet", a[4]);
-	TEST_ASSERT_NULL(a[5]);
+	TEST_ASSERT_NULL(a);
 	while (a[t] != NULL)
 	{
 		free(a[t]);

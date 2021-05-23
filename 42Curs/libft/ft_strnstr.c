@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 18:22:48 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/13 18:48:40 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/05/22 15:32:19 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 	while (str[i] != '\0' && i < len)
 	{
 		k = 0;
-		while (str[i + k] == to_find[k] && k < len)
+		while (str[i + k] == to_find[k] && (i + k) < len)
 		{
 			k++;
 			if (to_find[k] == '\0')
