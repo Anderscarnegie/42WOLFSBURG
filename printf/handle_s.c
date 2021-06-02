@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:44:45 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/30 19:10:35 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 17:40:58 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static void	putstr(char *s, t_data table)
 	int		x;
 
 	x = 0;
-	if (table->precision < 0)
-		table->precision = 0;
 	if (table->precision)
 	{
 		while (s[x] != '\0' && x < table->precision)
@@ -41,6 +39,11 @@ static void	notdash(char *s, t_data table)
 {
 	if (!(table->dash))
 	{
+		if (table->precision < 0)
+			table->precision = 0;
+		if (table->width > table->precision && table->precision
+			&& table->precision < table->output)
+			table->output = table->precision;
 		while (table->width && table->width > table->output)
 		{
 			table->c = ' ';
@@ -53,9 +56,14 @@ static void	notdash(char *s, t_data table)
 
 static void	dash(char *s, t_data table)
 {
+	if (table->precision < 0)
+		table->precision = 0;
 	if (table->dash)
 	{
 		putstr(s, table);
+		if (table->width > table->precision && table->precision
+			&& table->precision < table->output)
+			table->output = table->precision;
 		while (table->width && table->width > table->output)
 		{
 			table->c = ' ';
@@ -79,8 +87,7 @@ void	handle_s(t_data table)
 	{
 		while (table->width)
 		{
-			table->c = ' ';
-			table->count += write(1, &(table->c), 1);
+			table->count += write(1, " ", 1);
 			(table->width)--;
 		}
 	}

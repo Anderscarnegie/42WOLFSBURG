@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 09:12:54 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/29 09:13:51 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/01 22:29:02 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ t_data	reset_table(t_data table)
 	table->asterisk = 0;
 	table->width = 0;
 	table->output = 0;
+	table->precision = 0;
 	return (table);
 }

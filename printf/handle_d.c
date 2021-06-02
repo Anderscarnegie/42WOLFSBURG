@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:39:17 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/31 09:15:17 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 10:19:48 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	handle_d(t_data table)
 		x /= 10;
 		(table->output)++;
 	}
-	if (table->zero)
+	if (table->zero && !((table->precision) > 0) && !(table->dash))
 		zero_fill(num, table);
 	else
 		handle_spec(num, table);

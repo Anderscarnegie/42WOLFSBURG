@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 17:40:18 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/31 10:25:21 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 10:21:20 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	handle_x(t_data table)
 	}
 	if (table->period && !(table->precision) && num == 0)
 		table->output = 0;
-	if (table->zero)
+	if (table->zero && !((table->precision) > 0) && !(table->dash))
 		zero_fill(num, table);
 	else
 		handle_spec_x(num, table);

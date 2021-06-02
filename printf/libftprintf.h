@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 18:00:00 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/31 20:50:45 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 08:19:00 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	handle_spec_x(unsigned int num, t_data table);
 void	handle_spec_bigx(unsigned int num, t_data table);
 void	handle_spec_p(unsigned long num, t_data table);
 void	handle_spec_c(t_data table);
+void	handle_precis(long num, t_data table);
 void	parse(char *format, t_data table);
 t_data	init_table(t_data table);
 t_data	reset_table(t_data table);

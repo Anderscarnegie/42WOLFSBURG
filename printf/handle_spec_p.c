@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 18:29:32 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/31 13:37:47 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 16:37:26 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,25 @@
 
 static void	dashprecision(unsigned long num, t_data table)
 {
+	if (num < 0)
+	{
+		num = num * (-1);
+		table->count += write(1, "-", 1);
+		(table->output)--;
+		(table->width)--;
+	}
 	while (table->precision && table->precision > table->output)
 	{
-		table->c = '0';
-		table->count += write(1, &(table->c), 1);
+		table->count += write(1, "0", 1);
 		(table->output)++;
 	}
-	ft_putnbr_base(num, HEXLOW, table);
+	if (0 == num)
+		table->count += write(1, "0x0", 3);
+	else
+	{
+		table->count += write(1, "0x", 2);
+		ft_putnbr_base(num, HEXLOW, table);
+	}
 	while (table->width && table->width > (table->output))
 	{
 		table->c = ' ';
@@ -31,7 +43,13 @@ static void	dashprecision(unsigned long num, t_data table)
 
 static void	dashnotprecision(unsigned long num, t_data table)
 {
-	ft_putnbr_base(num, HEXLOW, table);
+	if (0 == num)
+		table->count += write(1, "0x0", 3);
+	else
+	{
+		table->count += write(1, "0x", 2);
+		ft_putnbr_base(num, HEXLOW, table);
+	}
 	while (table->width && table->width > table->output)
 	{
 		table->c = ' ';
@@ -42,24 +60,28 @@ static void	dashnotprecision(unsigned long num, t_data table)
 
 static void	notdashprecision(unsigned long num, t_data table)
 {
-	if (table->precision > table->output)
-		(table->width) -= table->output;
-	if (table->precision < table->width)
+	handle_precis(num, table);
+	if (num < 0)
 	{
-		while (table->width && table->width > (table->output))
-		{
-			table->c = ' ';
-			table->count += write(1, &(table->c), 1);
-			(table->width)--;
-		}
+		num = -num;
+		table->count += write(1, "-", 1);
+		if (table->precision > table->output)
+			(table->output)--;
+		if (table->precision == (table->output))
+			(table->precision)++;
 	}
 	while (table->precision && table->precision > table->output)
 	{
-		table->c = '0';
-		table->count += write(1, &(table->c), 1);
+		table->count += write(1, "0", 1);
 		(table->precision)--;
 	}
-	ft_putnbr_base(num, HEXLOW, table);
+	if (0 == num)
+		table->count += write(1, "0x0", 3);
+	else
+	{
+		table->count += write(1, "0x", 2);
+		ft_putnbr_base(num, HEXLOW, table);
+	}
 }
 
 static void	notdashnotprecision(unsigned long num, t_data table)
@@ -70,7 +92,13 @@ static void	notdashnotprecision(unsigned long num, t_data table)
 		table->count += write(1, &(table->c), 1);
 		(table->width)--;
 	}
-	ft_putnbr_base(num, HEXLOW, table);
+	if (0 == num)
+		table->count += write(1, "0x0", 3);
+	else
+	{
+		table->count += write(1, "0x", 2);
+		ft_putnbr_base(num, HEXLOW, table);
+	}
 }
 
 void	handle_spec_p(unsigned long num, t_data table)

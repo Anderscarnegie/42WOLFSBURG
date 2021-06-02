@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 18:29:32 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/31 09:22:04 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 14:17:55 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ static void	dashprecision(long num, t_data table)
 	if (num < 0)
 	{
 		num = num * (-1);
-		table->c = '-';
-		table->count += write(1, &(table->c), 1);
+		table->count += write(1, "-", 1);
 		(table->output)--;
+		(table->width)--;
 	}
 	while (table->precision && table->precision > table->output)
 	{
-		table->c = '0';
-		table->count += write(1, &(table->c), 1);
+		table->count += write(1, "0", 1);
 		(table->output)++;
 	}
 	ft_putnbr_base(num, DEC, table);
@@ -49,23 +48,15 @@ static void	dashnotprecision(long num, t_data table)
 
 static void	notdashprecision(long num, t_data table)
 {
-	if (table->precision > table->output)
-		(table->width) -= table->output;
-	if (table->precision < table->width)
-	{
-		while (table->width && table->width > (table->output))
-		{
-			table->c = ' ';
-			table->count += write(1, &(table->c), 1);
-			(table->width)--;
-		}
-	}
+	handle_precis(num, table);
 	if (num < 0)
 	{
 		num = -num;
-		table->c = '-';
-		table->count += write(1, &(table->c), 1);
-		(table->output)--;
+		table->count += write(1, "-", 1);
+		if (table->precision > (table->output))
+			(table->output)--;
+		if (table->precision == (table->output))
+			(table->precision)++;
 	}
 	while (table->precision && table->precision > table->output)
 	{
@@ -93,7 +84,10 @@ void	handle_spec(long num, t_data table)
 	if (table->dash && !(table->precision))
 		dashnotprecision(num, table);
 	if (!(table->dash) && table->precision)
+	{
 		notdashprecision(num, table);
+		return ;
+	}
 	if (!(table->dash) && !(table->precision))
 		notdashnotprecision(num, table);
 }

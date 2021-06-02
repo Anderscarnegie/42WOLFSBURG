@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 09:25:31 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/30 11:48:32 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 10:14:13 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ static char	*ft_strchr(const char *str, int ch)
 static void	handle_asterisk(t_data table)
 {
 	if (table->period)
+	{
 		table->precision = va_arg(table->ap, int);
+	}
 	else
 	{
 		table->width = va_arg(table->ap, int);

@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 12:35:45 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/31 13:36:43 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 16:32:52 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,16 @@ void	handle_p(t_data table)
 
 	num = (unsigned long)va_arg(table->ap, unsigned long);
 	x = num;
-	table->count += write(1, "0x", 2);
-	(table->output) += 2;
 	if (0 == num)
-	{
-		table->count += write(1, "0", 1);
-		(table->i)++;
-		return ;
-	}
+		table->output = 3;
+	else
+		table->output = 2;
 	while (x != 0)
 	{
 		x /= 16;
 		(table->output)++;
 	}
-	if (table->zero)
+	if (table->zero && !((table->precision) > 0) && !(table->dash))
 		zero_fill(num, table);
 	else
 		handle_spec_p(num, table);

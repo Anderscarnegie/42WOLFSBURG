@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 17:54:36 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/31 20:51:46 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/02 10:21:34 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	handle_bigx(t_data table)
 	}
 	if (table->period && !(table->precision) && num == 0)
 		table->output = 0;
-	if (table->zero)
+	if (table->zero && !((table->precision) > 0) && !(table->dash))
 		zero_fill(num, table);
 	else
 		handle_spec_bigx(num, table);
