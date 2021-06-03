@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:26:03 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/02 12:40:34 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/03 11:16:59 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	dispatch(char *format, t_data table)
 	else if (format[(table->i)] == 'c')
 		handle_c(table);
 	else if (format[(table->i)] == 's')
+	{
 		handle_s(table);
+		reset_table(table);
+	}
 	else if (format[(table->i)] == 'p')
 		handle_p(table);
 	else if (format[(table->i)] == 'u')

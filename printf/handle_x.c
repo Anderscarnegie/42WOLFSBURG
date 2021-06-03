@@ -6,19 +6,26 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 17:40:18 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/02 10:21:20 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/03 11:30:05 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static void	zero_fill(unsigned int num, t_data table)
+static void	zero_fill(unsigned long num, t_data table)
 {
 	while (table->width && table->width > (table->output))
 	{
-		table->c = '0';
-		table->count += write(1, &(table->c), 1);
-		(table->width)--;
+		if (table->period && !(table->precision))
+		{
+			table->count += write(1, " ", 1);
+			(table->width)--;
+		}
+		else
+		{
+			table->count += write(1, "0", 1);
+			(table->width)--;
+		}
 	}
 	ft_putnbr_base(num, HEXLOW, table);
 }

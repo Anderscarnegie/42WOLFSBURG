@@ -6,27 +6,43 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 15:39:17 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/02 10:19:48 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/03 10:37:46 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
+static void	put_minus(long *num, t_data table)
+{
+	if ((*num) < 0)
+	{
+		table->count += write(1, "-", 1);
+		*num = (*num) * (-1);
+	}
+}
+
 static void	zero_fill(long num, t_data table)
 {
-	if (num < 0)
+	if (table->period && !(table->precision))
 	{
-		num = -num;
-		table->c = '-';
-		table->count += write(1, &(table->c), 1);
+		while (table->width && table->width > (table->output))
+		{
+			table->count += write(1, " ", 1);
+			(table->width)--;
+		}
+		put_minus(&num, table);
+		ft_putnbr_base(num, DEC, table);
 	}
-	while (table->width && table->width > (table->output))
+	else
 	{
-		table->c = '0';
-		table->count += write(1, &(table->c), 1);
-		(table->width)--;
+		put_minus(&num, table);
+		while (table->width && table->width > (table->output))
+		{
+			table->count += write(1, "0", 1);
+			(table->width)--;
+		}
+		ft_putnbr_base(num, DEC, table);
 	}
-	ft_putnbr_base(num, DEC, table);
 }
 
 void	handle_d(t_data table)

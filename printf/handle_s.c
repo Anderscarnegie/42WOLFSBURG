@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:44:45 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/02 17:40:58 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/03 11:43:52 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void	dash(char *s, t_data table)
 
 void	handle_s(t_data table)
 {
-	char	*s;
-	int		x;
+	char		*s;
+	int			x;
 
 	x = 0;
 	s = (char *)va_arg(table->ap, char *);
@@ -97,5 +97,4 @@ void	handle_s(t_data table)
 		dash(s, table);
 	}
 	(table->i)++;
-	reset_table(table);
 }

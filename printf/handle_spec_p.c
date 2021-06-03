@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 18:29:32 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/02 16:37:26 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/03 11:35:45 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,6 @@
 
 static void	dashprecision(unsigned long num, t_data table)
 {
-	if (num < 0)
-	{
-		num = num * (-1);
-		table->count += write(1, "-", 1);
-		(table->output)--;
-		(table->width)--;
-	}
 	while (table->precision && table->precision > table->output)
 	{
 		table->count += write(1, "0", 1);
@@ -61,15 +54,6 @@ static void	dashnotprecision(unsigned long num, t_data table)
 static void	notdashprecision(unsigned long num, t_data table)
 {
 	handle_precis(num, table);
-	if (num < 0)
-	{
-		num = -num;
-		table->count += write(1, "-", 1);
-		if (table->precision > table->output)
-			(table->output)--;
-		if (table->precision == (table->output))
-			(table->precision)++;
-	}
 	while (table->precision && table->precision > table->output)
 	{
 		table->count += write(1, "0", 1);
