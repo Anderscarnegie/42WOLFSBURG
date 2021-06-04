@@ -6,18 +6,30 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:44:45 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/03 11:43:52 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/04 09:42:39 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+static void	putnul(char *s, t_data table)
+{
+	if (!s)
+	{
+		if (table->period && (table->precision < 6) && (table->precision > 0))
+			return ;
+		table->count += write(1, "0x0", 3);
+		return ;
+	}
+}
 
 static void	putstr(char *s, t_data table)
 {
 	int		x;
 
 	x = 0;
-	if (table->precision)
+	putnul(s, table);
+	if (s && table->precision)
 	{
 		while (s[x] != '\0' && x < table->precision)
 		{
@@ -27,7 +39,7 @@ static void	putstr(char *s, t_data table)
 	}
 	else
 	{
-		while (s[x] != '\0')
+		while (s && s[x] != '\0')
 		{
 			table->count += write(1, &(s[x]), 1);
 			x++;
@@ -41,6 +53,8 @@ static void	notdash(char *s, t_data table)
 	{
 		if (table->precision < 0)
 			table->precision = 0;
+		if (!s && (table->precision) && !(table->precision >= table->output))
+			(table->width)++;
 		if (table->width > table->precision && table->precision
 			&& table->precision < table->output)
 			table->output = table->precision;
@@ -61,13 +75,23 @@ static void	dash(char *s, t_data table)
 	if (table->dash)
 	{
 		putstr(s, table);
+		if (!s && (table->precision) && !(table->precision >= table->output))
+			(table->width)++;
 		if (table->width > table->precision && table->precision
 			&& table->precision < table->output)
 			table->output = table->precision;
-		while (table->width && table->width > table->output)
+		while ((table->width) && table->width > table->output)
 		{
-			table->c = ' ';
-			table->count += write(1, &(table->c), 1);
+			table->count += write(1, " ", 1);
+			(table->width)--;
+		}
+		if (table->width < table->precision && s)
+			return ;
+		while (table->width > 1 && table->width < table->output
+			&& table->width < table->precision
+			&& table->precision < table->output)
+		{
+			table->count += write(1, " ", 1);
 			(table->width)--;
 		}
 	}
@@ -76,16 +100,15 @@ static void	dash(char *s, t_data table)
 void	handle_s(t_data table)
 {
 	char		*s;
-	int			x;
 
-	x = 0;
 	s = (char *)va_arg(table->ap, char *);
-	while (s[x] != '\0')
-		x++;
-	table->output = x;
+	while (s && s[table->output] != '\0')
+		(table->output)++;
+	if (!s)
+		table->output = 3;
 	if ((table->period) && !(table->precision))
 	{
-		while (table->width)
+		while ((table->width))
 		{
 			table->count += write(1, " ", 1);
 			(table->width)--;

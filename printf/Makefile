@@ -6,7 +6,7 @@
 #    By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 12:52:22 by ioleinik          #+#    #+#              #
-#    Updated: 2021/06/03 11:44:02 by ioleinik         ###   ########.fr        #
+#    Updated: 2021/06/04 09:53:54 by ioleinik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ RM		= rm -f
 
 NAME	= libftprintf.a
 INCL	= libftprintf.h
-LIBFT	= make -C libft
 
 SRC		= ft_printf.c dispatch.c handle_d.c ft_putnbr_base.c handle_c.c \
 			handle_s.c handle_p.c handle_u.c handle_x.c handle_bigx.c \
@@ -36,14 +35,15 @@ $(NAME):	$(OBJ)
 
 main:
 			$(CC) $(CFLAGS) -c main.c
-			$(CC) $(CFLAGS) main.o -I. libftprintf.a
-			rm -f main.o
+			$(CC) $(CFLAGS) main.o -I. $(NAME)
+			$(RM) main.o
 
 clean:		
 			$(RM) $(OBJ) a.out
 
 fclean:		clean
 			$(RM) $(NAME)
+			$(RM) main.c
 
 re:			fclean all
 
