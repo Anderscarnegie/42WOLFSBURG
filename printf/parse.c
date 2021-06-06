@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 09:17:04 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/05/31 13:16:05 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/06 10:15:23 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	parse(char *format, t_data table)
 		if (format[table->i] == '%')
 		{
 			(table->i)++;
-			if (format[table->i] != '%')
+			if (format[table->i] != '%' && format[table->i] != ' ')
 			{
 				read_flags((char *)format, table);
 				dispatch((char *)format, table);
 			}
 			else
-				handle_perc(table);
+				handle_perc(format, table);
 		}
 		else
 		{

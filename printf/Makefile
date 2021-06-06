@@ -6,7 +6,7 @@
 #    By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/26 12:52:22 by ioleinik          #+#    #+#              #
-#    Updated: 2021/06/04 09:53:54 by ioleinik         ###   ########.fr        #
+#    Updated: 2021/06/06 10:36:38 by ioleinik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ clean:
 
 fclean:		clean
 			$(RM) $(NAME)
-			$(RM) main.c
 
 re:			fclean all
 

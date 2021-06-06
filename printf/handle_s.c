@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:44:45 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/04 09:42:39 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/05 15:41:39 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ static void	putnul(char *s, t_data table)
 	if (!s)
 	{
 		if (table->period && (table->precision < 6) && (table->precision > 0))
+		{
+			table->output = 0;
 			return ;
-		table->count += write(1, "0x0", 3);
+		}
+		table->count += write(1, "(null)", 6);
 		return ;
 	}
 }
@@ -105,7 +108,7 @@ void	handle_s(t_data table)
 	while (s && s[table->output] != '\0')
 		(table->output)++;
 	if (!s)
-		table->output = 3;
+		table->output = 6;
 	if ((table->period) && !(table->precision))
 	{
 		while ((table->width))

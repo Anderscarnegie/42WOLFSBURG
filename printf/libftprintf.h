@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 18:00:00 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/02 08:19:00 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/06 10:13:52 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	handle_p(t_data table);
 void	handle_u(t_data table);
 void	handle_x(t_data table);
 void	handle_bigx(t_data table);
-void	handle_perc(t_data table);
+void	handle_perc(char *format, t_data table);
 void	handle_spec(long num, t_data table);
 void	handle_spec_u(unsigned int num, t_data table);
 void	handle_spec_x(unsigned int num, t_data table);

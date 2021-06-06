@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 11:26:03 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/03 11:16:59 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/06/06 10:17:44 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	dispatch(char *format, t_data table)
 	else if (format[(table->i)] == 'X')
 		handle_bigx(table);
 	else if (format[(table->i)] == '%')
-		handle_perc(table);
+		handle_perc(format, table);
 	else
 	{
 		table->c = format[table->i];
