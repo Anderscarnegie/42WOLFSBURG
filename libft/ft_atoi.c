@@ -6,7 +6,7 @@
 /*   By: ioleinik <ioleinik@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 20:15:45 by ioleinik          #+#    #+#             */
-/*   Updated: 2021/06/19 17:00:35 by ioleinik         ###   ########.fr       */
+/*   Updated: 2021/09/17 20:20:49 by ioleinik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	ft_atoi(const char *str)
 	i = 0;
 	sign = 1;
 	res = 0;
-	while ((str[i] != '\0') && (str[i] == ' ' || str[i] == '\f' || str[i] == '\n'
-			|| str[i] == '\r' || str[i] == '\t' || str[i] == '\v'))
+	while ((str[i] != '\0') && (str[i] == ' ' || str[i] == '\f'
+			|| str[i] == '\n' || str[i] == '\r' || str[i] == '\t'
+			|| str[i] == '\v'))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
 	{
