@@ -29,25 +29,22 @@ SRC			= main.c check_contract.c initialize.c fill_deck.c swap.c push.c \
 
 OBJ			= ${SRC:.c=.o}
 
-all:		$(NAME)
+all:		$(LIBRARY) $(NAME)
 
 $(LIBRARY):
 			$(MAKE) -C $(LIB_PATH)
 
-$(NAME):	$(OBJ) $(LIBRARY)
+$(NAME):	$(OBJ)
 			$(CC) -I $(INCL_PATH) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LIB_PATH) -lft
-			$(RM) $(OBJ)
-
-push:		$(OBJ)
-			$(CC) -I $(INCL_PATH) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LIB_PATH) -lft
-			$(RM) $(OBJ)
+			
 
 clean:		
-			$(RM) $(OBJ) a.out
+			$(RM) $(OBJ)
 
 fclean:		clean
 			$(RM) $(NAME)
+			$(MAKE) -C $(LIB_PATH) fclean
 
 re:			fclean all
 
-.PHONY: all clean fclean re push $(LIBRARY)
+.PHONY: all clean fclean re
